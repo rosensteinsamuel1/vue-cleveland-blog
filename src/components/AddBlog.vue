@@ -29,7 +29,8 @@ export default {
         title: "",
         author: "",
         content: "",
-        topic: ""
+        topic: "",
+        timestamp: Date.now()
       },
       topics: ["Browns", "Indians", "Cavs", "Other"],
       submitted: false

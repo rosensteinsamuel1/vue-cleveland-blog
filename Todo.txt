@@ -1,3 +1,5 @@
+- Display date and author of each post
+- Re-order data, most recent post should be first
 - Style single blogs
 - Style list of blogs
 - Create modal for adding a blog

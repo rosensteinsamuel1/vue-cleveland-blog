@@ -38,6 +38,10 @@ export default {
           _blogs[key].id = key;
           blogsArray.push(_blogs[key]);
         }
+        // Sort by most recent
+        blogsArray.sort((a, b) => {
+          return b.timestamp - a.timestamp;
+        });
         console.log(blogsArray);
         this.loading = false;
         this.blogs = blogsArray;

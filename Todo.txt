@@ -1,0 +1,4 @@
+- Style single blogs
+- Style list of blogs
+- Create modal for adding a blog
+- Remove link styling when viewing all blogs

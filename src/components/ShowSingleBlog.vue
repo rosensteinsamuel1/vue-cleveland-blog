@@ -27,7 +27,10 @@ export default {
 
 <style>
 #single-blog {
+  padding: 20px;
   max-width: 960;
-  margin: 0 auto;
+  margin: auto;
+  box-sizing: border-box;
+  background: #eee;
 }
 </style>

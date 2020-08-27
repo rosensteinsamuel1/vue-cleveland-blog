@@ -14,8 +14,9 @@
       <select v-model="blog.topic">
         <option v-for="topic in topics" v-bind:key="topic.id">{{topic}}</option>
       </select>
-      <button v-on:click.prevent="post">Add Blog Post</button>
-      <button v-on:click="submitted = !submitted">Close</button>
+      <!-- <router-link v-on:click.prevent="post" v-bind:to="'/'" tag="button">Add Post</router-link> -->
+      <button v-on:click.prevent="post" @click="$router.push('/')">Add Blog Post</button>
+      <button @click="$router.push('/')">Return to posts</button>
     </form>
   </div>
 </template>
@@ -31,7 +32,7 @@ export default {
         topic: ""
       },
       topics: ["Browns", "Indians", "Cavs", "Other"],
-      submitted: true
+      submitted: false
     };
   },
   methods: {

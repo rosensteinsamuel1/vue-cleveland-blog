@@ -9,10 +9,7 @@
     <div id="all-blogs" v-if="!loading">
       <div class="single-blog" v-for="blog in blogs" v-bind:key="blog.id">
         <router-link v-bind:to="'/blog/' + blog.id">
-          <div>
-            <h2>{{blog.title | toUpperCase}}</h2>
-            <article>{{blog.content}}</article>
-          </div>
+          <single-blog v-bind:blog="blog" />
         </router-link>
       </div>
     </div>
@@ -20,7 +17,12 @@
 </template>
 
 <script>
+import SingleBlog from "./SingleBlog.vue";
+
 export default {
+  components: {
+    "single-blog": SingleBlog
+  },
   data() {
     return {
       blogs: [],
@@ -46,11 +48,6 @@ export default {
         this.loading = false;
         this.blogs = blogsArray;
       });
-  },
-  filters: {
-    toUpperCase(value) {
-      return value.toUpperCase();
-    }
   }
 };
 </script>
@@ -65,7 +62,11 @@ export default {
   padding: 20px;
   margin: 20px 10px;
   box-sizing: border-box;
-  background: #eee;
+}
+
+.single-blog a {
+  text-decoration: none;
+  color: black;
 }
 
 #loading {

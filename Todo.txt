@@ -1,4 +1,5 @@
-- Create button on single blog to return to list of blogs
+- Create button on single blog to return to list of blogs- DONE
+- Add basic VueX- DONE
 - Display date and author of each post in group view- DONE
 - Display date and author of each post in single view
 - Re-order data, most recent post should be first - DONE

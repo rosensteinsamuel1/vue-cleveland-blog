@@ -44,7 +44,6 @@ export default {
         blogsArray.sort((a, b) => {
           return b.timestamp - a.timestamp;
         });
-        console.log(blogsArray);
         this.loading = false;
         this.blogs = blogsArray;
       });

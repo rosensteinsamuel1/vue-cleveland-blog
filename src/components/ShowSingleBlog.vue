@@ -4,6 +4,7 @@
       <h4>The post is loading...</h4>
     </div>
     <div class="single-post" v-if="!loading">
+      <button @click="$router.push('/')">Return to posts</button>
       <h2>{{blog.title | toUpperCase}}</h2>
       <p>{{blog.content}}</p>
       <div class="post-information">

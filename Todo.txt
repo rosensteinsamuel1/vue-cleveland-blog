@@ -1,7 +1,13 @@
-- Display date and author of each post
-- Re-order data, most recent post should be first
+- Create button on single blog to return to list of blogs
+- Display date and author of each post in group view- DONE
+- Display date and author of each post in single view
+- Re-order data, most recent post should be first - DONE
 - Create mixin for toUppercase() and timestamp calculation (instead of repeating filter)
 - Style single blogs
 - Style list of blogs
 - Create modal for adding a blog
-- Remove link styling when viewing all blogs
+- Remove link styling when viewing all blogs- DONE
+
+- Restructuring:
+    - Have one component for both single blog view and blog list, just have filter for content
+    in the blog list to not show more than x characters

@@ -14,9 +14,10 @@
       <select v-model="blog.topic">
         <option v-for="topic in topics" v-bind:key="topic.id">{{topic}}</option>
       </select>
-      <!-- <router-link v-on:click.prevent="post" v-bind:to="'/'" tag="button">Add Post</router-link> -->
-      <button v-on:click.prevent="post" @click="$router.push('/')">Add Blog Post</button>
-      <button @click="$router.push('/')">Return to posts</button>
+      <div class="buttons">
+        <button v-on:click.prevent="post" @click="$router.push('/')">Add Blog Post</button>
+        <button @click="$router.push('/')">Return to posts</button>
+      </div>
     </form>
   </div>
 </template>

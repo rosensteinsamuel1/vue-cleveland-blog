@@ -7,7 +7,7 @@
       <h4>The posts are loading...</h4>
     </div>
     <div id="all-blogs" v-if="!loading">
-      <div class="single-blog" v-for="blog in blogs" v-bind:key="blog.id">
+      <div class="single-blog" v-for="blog in this.$store.state.blogs" v-bind:key="blog.id">
         <router-link v-bind:to="'/blog/' + blog.id">
           <single-blog v-bind:blog="blog" />
         </router-link>
@@ -18,35 +18,20 @@
 
 <script>
 import SingleBlog from "./SingleBlog.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
     "single-blog": SingleBlog
   },
   data() {
-    return {
-      blogs: [],
-      loading: true
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(["loading"])
   },
   created: function() {
-    const axios = require("axios");
-    axios
-      .get("https://whyamiaclevelandfan.firebaseio.com/posts.json")
-      .then(data => {
-        const _blogs = data.data;
-        const blogsArray = [];
-        for (let key in _blogs) {
-          _blogs[key].id = key;
-          blogsArray.push(_blogs[key]);
-        }
-        // Sort by most recent
-        blogsArray.sort((a, b) => {
-          return b.timestamp - a.timestamp;
-        });
-        this.loading = false;
-        this.blogs = blogsArray;
-      });
+    this.$store.dispatch("getBlogs");
   }
 };
 </script>

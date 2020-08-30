@@ -1,3 +1,4 @@
+- Vuex basic store implementation
 - Create button on single blog to return to list of blogs
 - Display date and author of each post in group view- DONE
 - Display date and author of each post in single view

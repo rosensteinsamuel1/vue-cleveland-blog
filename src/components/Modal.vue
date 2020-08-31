@@ -3,6 +3,8 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <button class="modal-button" @click="$emit('close')">X</button>
+
           <div class="modal-header">
             <slot name="header">default header</slot>
           </div>
@@ -11,12 +13,7 @@
             <slot name="body">default body</slot>
           </div>
 
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">OK</button>
-            </slot>
-          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
     </div>
@@ -46,7 +43,9 @@ export default {};
 }
 
 .modal-container {
-  width: 300px;
+  width: 50%;
+  overflow: hidden;
+  min-height: 60%;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -65,8 +64,9 @@ export default {};
   margin: 20px 0;
 }
 
-.modal-default-button {
+.modal-button {
   float: right;
+  padding: 0 5px;
 }
 
 /*

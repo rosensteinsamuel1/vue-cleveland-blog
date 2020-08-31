@@ -12,3 +12,6 @@
 - Restructuring:
     - Have one component for both single blog view and blog list, just have filter for content
     in the blog list to not show more than x characters
+
+- Testings:
+    - Ensure all inputs are full when creating new blog

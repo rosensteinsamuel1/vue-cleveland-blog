@@ -1,17 +1,20 @@
 <template>
   <div id="show-blogs">
-    <h1>All Blogs</h1>
-    <show-modal></show-modal>
-    <router-link v-bind:to="'/add'" tag="button">Add a blog post</router-link>
-    <!-- <input type="text" v-model="search" placeholder="search blogs" /> -->
-    <div id="loading" v-if="loading">
-      <h4>The posts are loading...</h4>
+    <div class="title">
+      <h1>All Blogs</h1>
+      <add-blog-modal />
     </div>
-    <div id="all-blogs" v-if="!loading">
-      <div class="single-blog" v-for="blog in this.$store.state.blogs" v-bind:key="blog.id">
-        <router-link v-bind:to="'/blog/' + blog.id">
-          <single-blog v-bind:blog="blog" />
-        </router-link>
+
+    <div class="blog-container">
+      <div id="loading" v-if="loading">
+        <h4>Posts are loading...</h4>
+      </div>
+      <div id="all-blogs" v-if="!loading">
+        <div class="single-blog" v-for="blog in this.$store.state.blogs" v-bind:key="blog.id">
+          <router-link v-bind:to="'/blog/' + blog.id">
+            <single-blog v-bind:blog="blog" />
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -19,13 +22,13 @@
 
 <script>
 import SingleBlog from "./SingleBlog";
-import ShowModal from "./ShowModal";
+import AddBlogModal from "./AddBlogModal";
 import { mapState } from "vuex";
 
 export default {
   components: {
     "single-blog": SingleBlog,
-    "show-modal": ShowModal
+    "add-blog-modal": AddBlogModal
   },
   data() {
     return {};
@@ -41,8 +44,17 @@ export default {
 
 <style scoped>
 #show-blogs {
-  max-width: 800px;
+  width: 90%;
   margin: 0 auto;
+  display: flex;
+}
+
+h1 {
+  margin-top: 15px;
+}
+
+.blog-container {
+  margin: auto;
 }
 
 .single-blog {

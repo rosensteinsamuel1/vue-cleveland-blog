@@ -1,6 +1,7 @@
 <template>
   <div id="show-blogs">
     <h1>All Blogs</h1>
+    <show-modal></show-modal>
     <router-link v-bind:to="'/add'" tag="button">Add a blog post</router-link>
     <!-- <input type="text" v-model="search" placeholder="search blogs" /> -->
     <div id="loading" v-if="loading">
@@ -17,12 +18,14 @@
 </template>
 
 <script>
-import SingleBlog from "./SingleBlog.vue";
+import SingleBlog from "./SingleBlog";
+import ShowModal from "./ShowModal";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    "single-blog": SingleBlog
+    "single-blog": SingleBlog,
+    "show-modal": ShowModal
   },
   data() {
     return {};

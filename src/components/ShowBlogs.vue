@@ -3,6 +3,7 @@
     <div class="title">
       <h1>All Blogs</h1>
       <add-blog-modal />
+      <input type="text" v-model="search" placeholder="search blogs or authors" />
     </div>
 
     <div class="blog-container">
@@ -10,7 +11,7 @@
         <h4>Posts are loading...</h4>
       </div>
       <div id="all-blogs" v-if="!loading">
-        <div class="single-blog" v-for="blog in this.$store.state.blogs" v-bind:key="blog.id">
+        <div class="single-blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
           <router-link v-bind:to="'/blog/' + blog.id">
             <single-blog v-bind:blog="blog" />
           </router-link>
@@ -31,10 +32,21 @@ export default {
     "add-blog-modal": AddBlogModal
   },
   data() {
-    return {};
+    return {
+      search: ""
+    };
   },
   computed: {
-    ...mapState(["loading"])
+    ...mapState(["loading"]),
+    filterBlogs: function() {
+      return this.$store.state.blogs.filter(blog => {
+        return (
+          blog.title.toLowerCase().match(this.search) ||
+          blog.content.toLowerCase().match(this.search) ||
+          blog.author.toLowerCase().match(this.search)
+        );
+      });
+    }
   },
   created: function() {
     this.$store.dispatch("getBlogs");
@@ -70,5 +82,11 @@ h1 {
 
 #loading {
   margin-top: 25px;
+}
+
+input {
+  padding: 2px;
+  margin-top: 15px;
+  font-size: 1rem;
 }
 </style>

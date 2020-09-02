@@ -2,7 +2,6 @@
   <div>
     <app-header />
     <div id="show-blogs">
-      <!-- <register-user /> -->
       <div class="blog-container">
         <div id="loading" v-if="loading">
           <h4>Posts are loading...</h4>
@@ -30,12 +29,9 @@ import SingleBlog from "./SingleBlog";
 import Header from "./Header";
 import { mapState } from "vuex";
 
-// import RegisterUser from "./RegisterUser";
-
 export default {
   components: {
     "single-blog": SingleBlog,
-    // "register-user": RegisterUser,
     "app-header": Header
   },
   data() {

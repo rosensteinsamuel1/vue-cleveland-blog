@@ -1,7 +1,8 @@
 - Search- DONE
 - Comments
 - Authentication
-    - Reconfigure the 'add-post' component from root 
+    - Reconfigure the 'add-post' component from root- DONE
+    - Restructure FB rules
 - Markdown support
 - Image uploads
 - Clean up styling 

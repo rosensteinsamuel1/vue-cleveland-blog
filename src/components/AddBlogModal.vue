@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button id="add-blog-btn" @click="showModal = true">Add New Blog</button>
+    <!-- <button id="add-blog-btn" @click="showModal = true">Add New Blog</button> -->
     <!-- use the modal component, pass in the prop -->
     <modal v-if="showModal" @close="showModal = false">
       <h3 slot="header">Publish a New Blog Post</h3>
@@ -51,6 +51,9 @@ export default {
     };
   },
   methods: {
+    show: function() {
+      this.showModal = true;
+    },
     post: function() {
       const axios = require("axios");
       axios

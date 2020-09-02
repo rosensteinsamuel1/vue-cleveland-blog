@@ -6,20 +6,24 @@
       </li>
       <!-- Options for users that are NOT logged in -->
       <li v-if="!signedIn">
-        <a href="#" v-on:click="logIn()">Log In</a>
+        <auth-modal ref="authModalLogIn" v-bind:newUser="false" />
+        <a href="#" v-on:click="logIn">Log In</a>
       </li>
       <li v-if="!signedIn">
-        <auth-modal ref="authModal" />
+        <auth-modal ref="authModal" v-bind:newUser="true" />
         <a href="#" v-on:click="signUp">Sign Up</a>
       </li>
 
       <!-- Options for users that are logged in -->
       <li v-if="signedIn">
-        <a href="#" v-on:click="logOut()">Log Out</a>
+        <a href="#">{{'Welcome, ' + username}}</a>
       </li>
       <li v-if="signedIn">
-        <!-- <a href="#" v-on:click="go to addBlogModal">Add New Post</a> -->
-        <add-blog-modal />
+        <add-blog-modal ref="addBlogModal" />
+        <a href="#" v-on:click="addBlog">Add New Post</a>
+      </li>
+      <li v-if="signedIn">
+        <a href="#" v-on:click="logOut()">Log Out</a>
       </li>
     </ul>
   </nav>
@@ -42,21 +46,21 @@ export default {
   },
   methods: {
     logIn: function() {
-      console.log("logIn");
+      this.$refs.authModalLogIn.show();
     },
-    // signUp: function() {
-    //   console.log("signUp");
-    // },
     logOut: function() {
-      console.log("logOut");
+      this.$store.commit("logOut");
     },
     signUp: function() {
       this.$refs.authModal.show();
+    },
+    addBlog: function() {
+      this.$refs.addBlogModal.show();
     }
   },
 
   computed: {
-    ...mapState(["signedIn"])
+    ...mapState(["signedIn", "username"])
   }
 };
 </script>

@@ -8,13 +8,25 @@ export const store = new Vuex.Store({
         blogs: [],
         filterBlogs: [],
         loading: true,
-        signedIn: false
+        signedIn: false,
+        username: ""
     },
     mutations: {
         getBlogs: (state, payload) => {
             console.log('BLOGS (using VueX): ', payload)
             state.blogs = payload
             state.loading = false;
+        },
+        signIn: (state) => {
+            state.signedIn = true
+        },
+        logOut: (state) => {
+            state.signedIn = false,
+                state.username = ""
+        },
+        setUsername: (state, payload) => {
+            console.log('payload.username: ', payload.username)
+            state.username = payload.username
         }
     },
     actions: {

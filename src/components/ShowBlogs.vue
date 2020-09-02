@@ -1,11 +1,32 @@
 <template>
   <div id="show-blogs">
-    <div class="title">
-      <h1>All Blogs</h1>
-      <add-blog-modal />
-      <input type="text" v-model="search" placeholder="search blogs or authors" />
-    </div>
+    <register-user />
+    <nav>
+      <ul>
+        <h1>All Blogs</h1>
 
+        <!-- Options for users that are NOT logged in -->
+        <li v-if="!signedIn">
+          <a href="#" v-on:click="logIn()">Log In</a>
+        </li>
+        <li v-if="!signedIn">
+          <a href="#" v-on:click="signUp()">Sign Up</a>
+        </li>
+
+        <!-- Options for users that are logged in -->
+        <li v-if="signedIn">
+          <a href="#" v-on:click="logOut()">Log Out</a>
+        </li>
+        <li v-if="signedIn">
+          <!-- <a href="#" v-on:click="go to addBlogModal">Add New Post</a> -->
+          <add-blog-modal />
+        </li>
+
+        <li>
+          <input type="text" v-model="search" placeholder="search blogs or authors" />
+        </li>
+      </ul>
+    </nav>
     <div class="blog-container">
       <div id="loading" v-if="loading">
         <h4>Posts are loading...</h4>
@@ -26,15 +47,30 @@ import SingleBlog from "./SingleBlog";
 import AddBlogModal from "./AddBlogModal";
 import { mapState } from "vuex";
 
+import RegisterUser from "./RegisterUser";
+
 export default {
   components: {
     "single-blog": SingleBlog,
-    "add-blog-modal": AddBlogModal
+    "add-blog-modal": AddBlogModal,
+    "register-user": RegisterUser
   },
   data() {
     return {
-      search: ""
+      search: "",
+      signedIn: true
     };
+  },
+  methods: {
+    logIn: function() {
+      console.log("logIn");
+    },
+    signUp: function() {
+      console.log("signUp");
+    },
+    logOut: function() {
+      console.log("logOut");
+    }
   },
   computed: {
     ...mapState(["loading"]),
@@ -55,14 +91,21 @@ export default {
 </script>
 
 <style scoped>
+/* NAVBAR STYLES */
+nav {
+  padding: 5px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 #show-blogs {
   width: 90%;
   margin: 0 auto;
   display: flex;
-}
-
-h1 {
-  margin-top: 15px;
 }
 
 .blog-container {

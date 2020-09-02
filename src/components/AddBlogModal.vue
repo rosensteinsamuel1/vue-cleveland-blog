@@ -1,6 +1,5 @@
-    <template>
-  <!-- app -->
-  <div id="app">
+<template>
+  <div>
     <button id="add-blog-btn" @click="showModal = true">Add New Blog</button>
     <!-- use the modal component, pass in the prop -->
     <modal v-if="showModal" @close="showModal = false">

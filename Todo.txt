@@ -1,4 +1,12 @@
-- Create button on single blog to return to list of blogs- DONE
+- Search- DONE
+- Comments
+- Authentication
+    - Reconfigure the 'add-post' component from root 
+- Markdown support
+- Image uploads
+- Clean up styling 
+
+Create button on single blog to return to list of blogs- DONE
 - Add basic VueX- DONE
 - Display date and author of each post in group view- DONE
 - Display date and author of each post in single view

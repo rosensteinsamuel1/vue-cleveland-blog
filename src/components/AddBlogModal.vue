@@ -31,6 +31,7 @@
 
 <script>
 import Modal from "./Modal";
+import { DB } from "../firebase/db";
 
 export default {
   components: {
@@ -55,16 +56,9 @@ export default {
       this.showModal = true;
     },
     post: function() {
-      const axios = require("axios");
-      axios
-        .post(
-          "https://whyamiaclevelandfan.firebaseio.com/posts.json",
-          this.blog
-        )
-        .then(data => {
-          console.log(data);
-          this.submitted = true;
-        });
+      DB.collection("posts")
+        .doc()
+        .set({ ...this.blog });
     }
   }
 };

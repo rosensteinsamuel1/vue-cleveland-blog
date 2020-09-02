@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { DB } from '../firebase/db'
 
 Vue.use(Vuex);
 
@@ -32,24 +33,14 @@ export const store = new Vuex.Store({
     actions: {
         getBlogs: (context) => {
             context.loading = true
-            const axios = require("axios");
-            axios
-                .get("https://whyamiaclevelandfan.firebaseio.com/posts.json")
-                .then(data => {
-                    const _blogs = data.data;
-                    const blogsArray = [];
-                    // Add Firebase unqiue ID to object for routing
-                    for (let key in _blogs) {
-                        _blogs[key].id = key;
-                        blogsArray.push(_blogs[key]);
-                    }
-                    // Sort by most recent
-                    blogsArray.sort((a, b) => {
-                        return b.timestamp - a.timestamp;
-                    });
-                    context.commit('getBlogs', blogsArray)
-                    // context.loading = false -- Why doesn't this work? 
-                });
+            DB.collection('posts').get().then(result => {
+                const _blogs = []
+                result.docs.map(doc => {
+                    _blogs.push(doc.data())
+                })
+                context.commit('getBlogs', _blogs)
+            })
+            // return snapshot.docs.map(doc => (doc.data()))
         }
     }
 })

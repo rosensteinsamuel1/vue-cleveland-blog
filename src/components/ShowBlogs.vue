@@ -42,9 +42,10 @@ export default {
   },
 
   computed: {
-    ...mapState(["loading"]),
+    ...mapState(["loading", "blogs"]),
     filterBlogs: function() {
       return this.$store.state.blogs.filter(blog => {
+        console.log(blog);
         return (
           blog.title.toLowerCase().match(this.search) ||
           blog.content.toLowerCase().match(this.search) ||

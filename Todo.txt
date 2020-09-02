@@ -1,8 +1,9 @@
 - Search- DONE
-- Comments
+- Comments 
 - Authentication
     - Reconfigure the 'add-post' component from root- DONE
     - Restructure FB rules
+    - Save local user
 - Markdown support
 - Image uploads
 - Clean up styling 

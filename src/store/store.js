@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         blogs: [],
-        loading: true
+        filterBlogs: [],
+        loading: true,
+        signedIn: false
     },
     mutations: {
         getBlogs: (state, payload) => {

@@ -48,7 +48,6 @@
 
 <script>
 import { Auth } from "../firebase/auth";
-import { DB } from "../firebase/db";
 import validate from "../modules/validation-module";
 import Modal from "./Modal";
 
@@ -84,9 +83,6 @@ export default {
       if (!validate.email(this.email)) {
         this.errors.push("Please enter a valid email address");
       }
-      //   if (!validate.password(this.password)) {
-      //     this.errors.push("Your password is not strong enough!");
-      //   }
       if (!this.errors.length) {
         event.target.classList.add("was-validated");
         if (this.newUser) {
@@ -94,24 +90,11 @@ export default {
           Auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(created => {
               // Save new user to Firestore
-              DB.collection("users")
-                .doc(created.user.uid)
-                .set({
-                  username: this.username,
-                  email: this.email
-                })
-                .then(() => {
-                  this.signIn();
-                  this.setUser({
-                    user: {
-                      name: this.username
-                    }
-                  });
-                  // this.signedIn = true;
-                })
-                .catch(err => {
-                  console.log("ERROR: ", err);
-                });
+              this.$store.dispatch("signInNewUser", {
+                id: created.user.uid,
+                username: this.username,
+                email: this.email
+              });
             })
             .catch(error => {
               this.errors.push(error.message);
@@ -122,18 +105,7 @@ export default {
             .then(response => {
               console.log(response.user.uid);
               // retrieve user data from Firestore
-              // this.$store.dispatch("getUser", response.user.uid);
-              DB.collection("users")
-                .doc(response.user.uid)
-                .get()
-                .then(doc => {
-                  console.log("doc.data(): ", doc);
-                  this.signIn();
-                  this.setUser({
-                    name: doc.data().username,
-                    id: doc.id
-                  });
-                });
+              this.$store.dispatch("getUserInfo", response.user.uid);
             })
             .catch(err => {
               console.log(err);

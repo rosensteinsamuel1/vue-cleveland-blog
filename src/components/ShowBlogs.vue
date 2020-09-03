@@ -52,9 +52,9 @@ export default {
       });
     }
   },
-  beforeCreate: function() {
-    this.$store.dispatch("retrieveUser");
-  },
+  // beforeCreate: function() {
+  //   this.$store.dispatch("retrieveUser");
+  // },
   created: function() {
     this.$store.dispatch("getBlogs");
   }

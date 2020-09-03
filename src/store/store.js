@@ -18,12 +18,13 @@ export const store = new Vuex.Store({
     },
     mutations: {
         getBlogs: (state, payload) => {
-            console.log('BLOGS (using VueX): ', payload)
             state.blogs = payload
             state.loading = false;
         },
-        signIn: (state) => {
+        signInUser: (state, payload) => {
             state.signedIn = true
+            state.user.name = payload.name
+            state.user.id = payload.id
         },
         logOut: (state) => {
             state.signedIn = false;
@@ -52,25 +53,39 @@ export const store = new Vuex.Store({
                     context.user.id = null
                 } else {
                     console.log('user is alread logged in!')
-                    context.dispatch('getUser', user.uid)
-                    // router.replace('/forum')
+                    if (!user.name) {
+                        context.dispatch('getUserInfo', user.uid)
+                    }
                 }
             })
         },
-        getUser: (context, uid) => {
-            console.log('getUser: ', uid)
+        signInNewUser: (context, user) => {
+            console.log('signInNewUser')
+            DB.collection("users")
+                .doc(user.id)
+                .set({
+                    username: user.username,
+                    email: user.email
+                })
+                .then(() => {
+                    context.dispatch('getUserInfo', user.id)
+
+                })
+                .catch(err => {
+                    console.log("ERROR: ", err);
+                });
+        },
+        getUserInfo: (context, uid) => {
             DB.collection("users")
                 .doc(uid)
                 .get()
                 .then(doc => {
                     console.log("doc.data(): ", doc);
-                    context.commit('signIn');
-                    context.commit('setUser', {
+                    context.commit('signInUser', {
                         name: doc.data().username,
                         id: doc.id
                     });
                 });
         }
-
     }
 })

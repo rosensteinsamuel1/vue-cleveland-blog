@@ -11,8 +11,8 @@
         <form>
           <label>Title:</label>
           <input type="text" required v-model="blog.title" />
-          <label>Author:</label>
-          <input type="text" required v-model="blog.author" />
+          <!-- <label>Author:</label>
+          <input type="text" required v-model="blog.author" />-->
           <label>Content:</label>
           <textarea type="text" required rows="4" v-model="blog.content" />
 
@@ -32,6 +32,7 @@
 <script>
 import Modal from "./Modal";
 import { DB } from "../firebase/db";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -42,7 +43,6 @@ export default {
       showModal: false,
       blog: {
         title: "",
-        author: "",
         content: "",
         topic: "",
         timestamp: Date.now()
@@ -51,14 +51,18 @@ export default {
       submitted: false
     };
   },
+  computed: {
+    ...mapState(["username"])
+  },
   methods: {
     show: function() {
       this.showModal = true;
     },
     post: function() {
+      console.log({ ...this.blog });
       DB.collection("posts")
         .doc()
-        .set({ ...this.blog });
+        .set({ ...this.blog, author: this.username });
     }
   }
 };

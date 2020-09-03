@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["username"])
+    ...mapState(["user"])
   },
   methods: {
     show: function() {
@@ -55,7 +55,7 @@ export default {
       docRef.update({
         comments: firebase.firestore.FieldValue.arrayUnion({
           ...this.comment,
-          author: "The commentator"
+          author: this.user.name
         })
       });
     }

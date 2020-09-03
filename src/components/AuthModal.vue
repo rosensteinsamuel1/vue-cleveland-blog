@@ -75,7 +75,7 @@ export default {
     ...mapState(["signedIn"])
   },
   methods: {
-    ...mapMutations(["signIn", "setUsername"]),
+    ...mapMutations(["signIn", "setUser"]),
     show: function() {
       this.showModal = true;
     },
@@ -93,6 +93,7 @@ export default {
           // Create new user in Firebase
           Auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(created => {
+              // Save new user to Firestore
               DB.collection("users")
                 .doc(created.user.uid)
                 .set({
@@ -101,8 +102,10 @@ export default {
                 })
                 .then(() => {
                   this.signIn();
-                  this.setUsername({
-                    username: this.username
+                  this.setUser({
+                    user: {
+                      name: this.username
+                    }
                   });
                   // this.signedIn = true;
                 })
@@ -119,13 +122,16 @@ export default {
             .then(response => {
               console.log(response.user.uid);
               // retrieve user data from Firestore
+              // this.$store.dispatch("getUser", response.user.uid);
               DB.collection("users")
                 .doc(response.user.uid)
                 .get()
                 .then(doc => {
+                  console.log("doc.data(): ", doc);
                   this.signIn();
-                  this.setUsername({
-                    username: doc.data().username
+                  this.setUser({
+                    name: doc.data().username,
+                    id: doc.id
                   });
                 });
             })

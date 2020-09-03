@@ -52,7 +52,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["username"])
+    ...mapState(["user"])
   },
   methods: {
     show: function() {
@@ -62,7 +62,7 @@ export default {
       console.log({ ...this.blog });
       DB.collection("posts")
         .doc()
-        .set({ ...this.blog, author: this.username });
+        .set({ ...this.blog, author: this.user.name });
     }
   }
 };

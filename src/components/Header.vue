@@ -16,7 +16,7 @@
 
       <!-- Options for users that are logged in -->
       <li v-if="signedIn">
-        <a href="#">{{'Welcome, ' + username}}</a>
+        <a href="#">{{'Welcome, ' + user.name}}</a>
       </li>
       <li v-if="signedIn">
         <add-blog-modal ref="addBlogModal" />
@@ -44,6 +44,9 @@ export default {
       search: ""
     };
   },
+  computed: {
+    ...mapState(["signedIn", "user"])
+  },
   methods: {
     logIn: function() {
       this.$refs.authModalLogIn.show();
@@ -57,10 +60,6 @@ export default {
     addBlog: function() {
       this.$refs.addBlogModal.show();
     }
-  },
-
-  computed: {
-    ...mapState(["signedIn", "username"])
   }
 };
 </script>

@@ -36,11 +36,9 @@ export default {
   },
   data() {
     return {
-      search: "",
-      signedIn: true
+      search: ""
     };
   },
-
   computed: {
     ...mapState(["loading", "blogs"]),
     filterBlogs: function() {
@@ -53,6 +51,9 @@ export default {
         );
       });
     }
+  },
+  beforeCreate: function() {
+    this.$store.dispatch("retrieveUser");
   },
   created: function() {
     this.$store.dispatch("getBlogs");

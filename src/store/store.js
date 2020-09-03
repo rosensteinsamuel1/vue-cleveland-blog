@@ -34,13 +34,13 @@ export const store = new Vuex.Store({
         getBlogs: (context) => {
             context.loading = true
             DB.collection('posts').get().then(result => {
+
                 const _blogs = []
                 result.docs.map(doc => {
-                    _blogs.push(doc.data())
+                    _blogs.push({ ...doc.data(), id: doc.id })
                 })
                 context.commit('getBlogs', _blogs)
             })
-            // return snapshot.docs.map(doc => (doc.data()))
         }
     }
 })

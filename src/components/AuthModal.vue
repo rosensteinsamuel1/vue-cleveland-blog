@@ -123,7 +123,6 @@ export default {
                 .doc(response.user.uid)
                 .get()
                 .then(doc => {
-                  console.log("response DATA: " + doc.data().username);
                   this.signIn();
                   this.setUsername({
                     username: doc.data().username

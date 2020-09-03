@@ -6,12 +6,39 @@
       <p>Submitted by: {{blog.author}}</p>
       <p>Date: {{blog.timestamp | formatTimestamp}}</p>
     </div>
+    <div class="comment-links">
+      <add-comment-modal ref="addCommentModal" v-bind:blogId="blog.id" />
+      <a href="#" v-if="signedIn" v-on:click="addComment" class="add-comment">Add Comment</a>
+      <comments v-if="blog.comments" v-bind:comments="blog.comments" v-bind:blogId="blog.id" />
+    </div>
   </div>
 </template>
 
 <script>
+import Comments from "./Comments";
+import AddCommentModal from "./AddCommentModal";
+
+import { mapState } from "vuex";
+
 export default {
+  components: {
+    comments: Comments,
+    "add-comment-modal": AddCommentModal
+  },
   props: ["blog"],
+  data() {
+    return {
+      showComments: false
+    };
+  },
+  computed: {
+    ...mapState(["signedIn"])
+  },
+  methods: {
+    addComment: function() {
+      this.$refs.addCommentModal.show();
+    }
+  },
   filters: {
     toUpperCase(value) {
       return value.toUpperCase();
@@ -47,5 +74,14 @@ export default {
 
 .single-post p {
   padding: 5px;
+}
+
+.comment-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-comment {
+  margin-right: auto;
 }
 </style>

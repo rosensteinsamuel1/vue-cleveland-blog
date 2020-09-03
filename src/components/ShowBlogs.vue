@@ -14,9 +14,9 @@
             placeholder="Search blogs or authors"
           />
           <div class="single-blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
-            <router-link v-bind:to="'/blog/' + blog.id">
-              <single-blog v-bind:blog="blog" />
-            </router-link>
+            <!-- <router-link v-bind:to="'/blog/' + blog.id"> -->
+            <single-blog v-bind:blog="blog" />
+            <!-- </router-link> -->
           </div>
         </div>
       </div>

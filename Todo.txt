@@ -1,6 +1,10 @@
 - Add real-time listeners for new posts and comments
+
 - Search- DONE
 - Comments 
+    - View and hide comments from all blogs view- DONE
+    - Save comments to firestore- DONE
+    - Refactor all HTTP calls to Vuex store
 - Authentication
     - Reconfigure the 'add-post' component from root- DONE
     - Restructure FB rules

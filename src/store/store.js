@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { DB } from '../firebase/db'
 import { Auth } from '../firebase/auth'
+import { Storage } from '../firebase/storage'
+import { v4 as uuidv4 } from 'uuid'
 
 Vue.use(Vuex);
 
@@ -31,7 +33,6 @@ export const store = new Vuex.Store({
             state.user.name = ""
         },
         setUser: (state, payload) => {
-            console.log('payload.user: ', payload.name)
             state.user.name = payload.name
             state.user.id = payload.id
         }
@@ -86,6 +87,27 @@ export const store = new Vuex.Store({
                         id: doc.id
                     });
                 });
+        },
+        addNewBlog: (context, blog) => {
+            // create a unique identifier for the image's location and retrieval
+            let imageId = uuidv4();
+            DB.collection("posts")
+                .doc()
+                .set({
+                    title: blog.title,
+                    content: blog.content,
+                    topic: blog.topic,
+                    timestamp: Date.now(),
+                    author: context.state.user.name,
+                    imageId: imageId
+                })
+                .then(() => {
+                    if (blog.selectedImage) {
+                        // upload image to firebase storage
+                        const ref = Storage.ref().child('images/' + imageId)
+                        ref.put(blog.selectedImage)
+                    }
+                })
         }
     }
 })

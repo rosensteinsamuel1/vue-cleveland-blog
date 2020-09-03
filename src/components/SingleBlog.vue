@@ -6,6 +6,9 @@
       <p>Submitted by: {{blog.author}}</p>
       <p>Date: {{blog.timestamp | formatTimestamp}}</p>
     </div>
+    <div>
+      <img id="blog-img" height="150" />
+    </div>
     <div class="comment-links">
       <add-comment-modal ref="addCommentModal" v-bind:blogId="blog.id" />
       <a href="#" v-if="signedIn" v-on:click="addComment" class="add-comment">Add Comment</a>
@@ -17,7 +20,7 @@
 <script>
 import Comments from "./Comments";
 import AddCommentModal from "./AddCommentModal";
-
+import { Storage } from "../firebase/storage";
 import { mapState } from "vuex";
 
 export default {
@@ -37,6 +40,18 @@ export default {
   methods: {
     addComment: function() {
       this.$refs.addCommentModal.show();
+    }
+  },
+  created() {
+    if (this.blog.imageId) {
+      Storage.ref()
+        .child(`images/${this.blog.imageId}`)
+        .getDownloadURL()
+        .then(url => {
+          const img = document.getElementById("blog-img");
+          img.src = url;
+        })
+        .catch(err => console.log(err));
     }
   },
   filters: {

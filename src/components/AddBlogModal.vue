@@ -20,6 +20,9 @@
           <select v-model="blog.topic">
             <option v-for="topic in topics" v-bind:key="topic.id">{{topic}}</option>
           </select>
+          <Label>Add Image</Label>
+          <input type="file" @change="onFileSelected" accept="image/*" />
+          <img v-if="imageUrl" v-bind:src="imageUrl" alt height="150" />
           <div class="buttons">
             <button v-on:click.prevent="post" v-on:click="showModal=false">Submit</button>
           </div>
@@ -31,7 +34,7 @@
 
 <script>
 import Modal from "./Modal";
-import { DB } from "../firebase/db";
+// import { DB } from "../firebase/db";
 import { mapState } from "vuex";
 
 export default {
@@ -45,8 +48,11 @@ export default {
         title: "",
         content: "",
         topic: "",
+        selectedImage: null,
+        imageName: "",
         timestamp: Date.now()
       },
+      imageUrl: null,
       topics: ["Browns", "Indians", "Cavs", "Other"],
       submitted: false
     };
@@ -60,9 +66,19 @@ export default {
     },
     post: function() {
       console.log({ ...this.blog });
-      DB.collection("posts")
-        .doc()
-        .set({ ...this.blog, author: this.user.name });
+      this.$store.dispatch("addNewBlog", this.blog);
+    },
+    onFileSelected(event) {
+      const files = event.target.files;
+      this.blog.selectedImage = files[0];
+      this.blog.imageName = files[0].name;
+
+      // preview image in DOM
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
     }
   }
 };

@@ -1,8 +1,7 @@
 <template>
   <div class="comment">
-    <h4>{{comment.content}}</h4>
-    <p>{{comment.author}}</p>
-    <p>{{comment.date}}</p>
+    <p>{{comment.content}}</p>
+    <p class="comment__author">{{comment.author}}</p>
   </div>
 </template>
 
@@ -17,8 +16,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .comment {
   padding: 10px;
+
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: black;
+
+  &__author {
+    font-weight: 600;
+  }
 }
 </style>

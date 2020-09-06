@@ -18,17 +18,7 @@
       </div>
 
       <p class="single-post__date">Published: {{blog.timestamp | formatTimestamp}}</p>
-
-      <div class="single-post__comment-links">
-        <div class="single-post__add-comment">
-          <add-comment-modal ref="addCommentModal" v-bind:blogId="blog.id" />
-          <a href="#" v-if="signedIn" v-on:click="addComment" class="add-comment">Add Comment</a>
-          <a href="#" v-if="!signedIn" class="add-comment">Sign in to comment</a>
-        </div>
-        <div>
-          <comments v-if="blog.comments" v-bind:comments="blog.comments" v-bind:blogId="blog.id" />
-        </div>
-      </div>
+      <comments v-bind:comments="blog.comments || []" v-bind:blogId="blog.id" />
     </div>
     <div class="single-post__image-container" v-if="blog.imageId">
       <img v-bind:src="imageSrc" />
@@ -38,7 +28,6 @@
 
 <script>
 import Comments from "./Comments";
-import AddCommentModal from "./AddCommentModal";
 import MarkdownPreview from "./MarkdownPreview";
 import { Storage } from "../firebase/storage";
 import { mapState } from "vuex";
@@ -46,23 +35,21 @@ import { mapState } from "vuex";
 export default {
   components: {
     comments: Comments,
-    "add-comment-modal": AddCommentModal,
     "markdown-preview": MarkdownPreview
   },
-  props: ["blog"],
+  props: {
+    blog: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      showComments: false,
       imageSrc: null
     };
   },
   computed: {
     ...mapState(["signedIn"])
-  },
-  methods: {
-    addComment: function() {
-      this.$refs.addCommentModal.show();
-    }
   },
   created() {
     if (this.blog.imageId) {
@@ -70,7 +57,6 @@ export default {
         .child(`images/${this.blog.imageId}`)
         .getDownloadURL()
         .then(url => {
-          // const img = document.getElementById("blog-img");
           this.imageSrc = url;
         })
         .catch(err => console.log(err));
@@ -158,23 +144,6 @@ $baby-blue: #e1faff;
     border-width: 1px;
     padding: 10px 5px;
     width: 90%;
-  }
-
-  &__comment-links {
-    display: flex;
-    background-color: $baby-blue;
-    height: 25px;
-    padding: 0 5px;
-
-    border-top-style: solid;
-    border-width: 1px;
-    border-color: black;
-
-    justify-content: space-between;
-
-    a {
-      text-decoration: none;
-    }
   }
 
   p {

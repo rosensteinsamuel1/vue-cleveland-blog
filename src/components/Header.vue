@@ -2,7 +2,7 @@
   <nav>
     <ul v-if="!loading">
       <li>
-        <h1>All Blogs</h1>
+        <h1 class="navbar__title">All Blogs</h1>
       </li>
       <!-- Options for users that are NOT logged in -->
       <li v-if="!signedIn">
@@ -66,8 +66,15 @@ export default {
 
 <style scoped lang=scss>
 $baby-blue: #e1faff;
+$dark-blue-1: #79beee;
 
 /* NAVBAR STYLES */
+.navbar {
+  &__title {
+    color: $dark-blue-1;
+  }
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -88,7 +95,8 @@ a {
   padding: 8px;
   background-color: #dddddd;
   text-decoration: none;
-  color: $baby-blue;
+  color: $dark-blue-1;
+  font-weight: 600;
 }
 
 /** AUTHMODAL STYLES */

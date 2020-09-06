@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" v-bind:class="{authModalContainer: isAuthModal}">
           <button class="modal-button" @click="$emit('close')">X</button>
 
           <div class="modal-header">
@@ -21,7 +21,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    isAuthModal: {
+      type: Boolean,
+      require: false,
+      default: false
+    }
+  }
+};
 </script>
 
 <style scoped>

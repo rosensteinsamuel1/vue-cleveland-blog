@@ -52,9 +52,6 @@ export default {
       });
     }
   },
-  // beforeCreate: function() {
-  //   this.$store.dispatch("retrieveUser");
-  // },
   created: function() {
     this.$store.dispatch("getBlogs");
   }
@@ -72,20 +69,8 @@ export default {
   margin: auto;
   width: 80%;
 }
-
-.single-blog {
-  padding: 20px;
-  margin: 20px 10px;
-  box-sizing: border-box;
-}
-
-.single-blog a {
-  text-decoration: none;
-  color: black;
-}
-
 #loading {
-  margin-top: 25px;
+  margin-top: 25px auto;
 }
 
 .search-bar {

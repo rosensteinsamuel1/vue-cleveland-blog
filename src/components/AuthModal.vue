@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal v-if="showModal" @close="showModal = false">
+    <modal v-if="showModal" @close="showModal = false" v-bind:isAuthModal="true">
       <div slot="header">
         <h2>{{newUser ? 'Sign Up': 'Log In'}}</h2>
       </div>
@@ -37,9 +37,11 @@
               placeholder="Password"
             />
           </div>
-          <div>
-            <button type="submit" v-on:click="showModal=false">{{newUser ? 'Sign Up': 'Sign In'}}</button>
-          </div>
+          <button
+            class="btn-submit"
+            type="submit"
+            v-on:click="showModal=false"
+          >{{newUser ? 'Sign Up': 'Sign In'}}</button>
         </form>
       </div>
     </modal>
@@ -117,4 +119,35 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+$baby-blue: #e1faff;
+
+/** AUTHMODAL STYLING (inside of the Modal component) */
+/deep/ .authModalContainer {
+  background: black;
+  max-width: 450px;
+  padding: 0;
+
+  h2 {
+    color: white;
+  }
+
+  form div {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      background-color: $baby-blue;
+      margin: 10px 0;
+      padding: 5px;
+      height: 3.8rem;
+    }
+  }
+
+  .btn-submit {
+    height: 50px;
+    width: 100%;
+    margin: 0px;
+  }
+}
+</style>

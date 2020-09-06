@@ -64,7 +64,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang=scss>
+$baby-blue: #e1faff;
+
 /* NAVBAR STYLES */
 ul {
   list-style-type: none;
@@ -85,5 +87,9 @@ a {
   display: block;
   padding: 8px;
   background-color: #dddddd;
+  text-decoration: none;
+  color: $baby-blue;
 }
+
+/** AUTHMODAL STYLES */
 </style>

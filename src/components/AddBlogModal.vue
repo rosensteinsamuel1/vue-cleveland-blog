@@ -20,7 +20,7 @@
           </div>
 
           <label>Content:</label>
-          <textarea type="text" required rows="4" v-model="blog.content" />
+          <textarea type="text" required rows="4" v-model="blog.content" maxlength="140" />
 
           <markdown-preview v-if="blog.isMarkdown" v-bind:content="blog.content" />
 
@@ -81,7 +81,6 @@ export default {
     onFileSelected(event) {
       const files = event.target.files;
       this.blog.selectedImage = files[0];
-      // this.blog.imageName = files[0].name;
 
       // preview image in DOM
       const fileReader = new FileReader();

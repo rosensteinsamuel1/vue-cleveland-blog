@@ -47,4 +47,7 @@ export default {
 .show-comments {
   margin-left: auto;
 }
+a {
+  text-decoration: none;
+}
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div>
     <modal v-if="showModal" @close="showModal = false" v-bind:isAuthModal="true">
-      <div slot="header">
+      <div slot="body" class="modal-body">
         <h2>{{newUser ? 'Sign Up': 'Log In'}}</h2>
-      </div>
-      <div slot="body">
         <form @submit.prevent="submit">
           <ul v-if="errors.length">
             <li v-for="error in errors" :key="error">{{error}}</li>

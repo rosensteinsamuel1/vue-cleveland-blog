@@ -5,15 +5,9 @@
         <div class="modal-container" v-bind:class="{authModalContainer: isAuthModal}">
           <button class="modal-button" @click="$emit('close')">X</button>
 
-          <div class="modal-header">
-            <slot name="header">default header</slot>
-          </div>
-
-          <div class="modal-body">
+          <div class="modal-content">
             <slot name="body">default body</slot>
           </div>
-
-          <div class="modal-footer"></div>
         </div>
       </div>
     </div>

@@ -6,12 +6,16 @@
       <p class="single-post__author">Submitted by: {{blog.author}}</p>
       <p v-if="!blog.isMarkdown">{{blog.content}}</p>
 
-      <markdown-preview
-        class="single-post__md-preview"
-        v-if="blog.isMarkdown"
-        v-bind:content="blog.content"
-        v-bind:displayMode="true"
-      />
+      <div v-if="blog.isMarkdown">
+        <markdown-preview
+          class="single-post__md-preview"
+          v-bind:content="blog.content"
+          v-bind:displayMode="true"
+        />
+        <p class="single-post__md-p">
+          <i>The post is being displayed in markdown</i>
+        </p>
+      </div>
 
       <p class="single-post__date">Published: {{blog.timestamp | formatTimestamp}}</p>
 
@@ -128,6 +132,11 @@ $baby-blue: #e1faff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__md-p {
+    font-size: 0.8rem;
+    text-align: right;
   }
 
   &__title {

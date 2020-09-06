@@ -31,6 +31,7 @@ export const store = new Vuex.Store({
         logOut: (state) => {
             state.signedIn = false;
             state.user.name = ""
+            state.user.id = null
         },
         setUser: (state, payload) => {
             state.user.name = payload.name
@@ -51,7 +52,7 @@ export const store = new Vuex.Store({
         retrieveUser: (context) => {
             Auth.onAuthStateChanged((user) => {
                 if (user === null) {
-                    context.user.id = null
+                    // context.user.id = null
                 } else {
                     console.log('user is alread logged in!')
                     if (!user.name) {
@@ -87,6 +88,12 @@ export const store = new Vuex.Store({
                         id: doc.id
                     });
                 });
+        },
+        logOut: (context) => {
+            Auth.signOut().then(() => {
+                console.log('Signed out from Firebase')
+                context.commit('logOut')
+            }).catch(err => console.log('There was an ERROR signing out: ', err))
         },
         addNewBlog: (context, blog) => {
             // create a unique identifier for the image's location and retrieval

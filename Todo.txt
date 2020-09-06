@@ -1,7 +1,7 @@
 - Add real-time listeners for new posts and comments
 
 - Search- DONE
-- Comments 
+- Comments- DONE
     - View and hide comments from all blogs view- DONE
     - Save comments to firestore- DONE
     - Refactor all HTTP calls to Vuex store
@@ -11,7 +11,7 @@
     - Save local user
     - Keep user signed in after refresh of page
 - Markdown support
-- Image uploads
+- Image uploads - sDONE
 - Clean up styling 
 
 Create button on single blog to return to list of blogs- DONE

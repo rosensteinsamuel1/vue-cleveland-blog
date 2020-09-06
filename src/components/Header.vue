@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul>
+    <ul v-if="!loading">
       <li>
         <h1>All Blogs</h1>
       </li>
@@ -45,14 +45,14 @@ export default {
     };
   },
   computed: {
-    ...mapState(["signedIn", "user"])
+    ...mapState(["signedIn", "user", "loading"])
   },
   methods: {
     logIn: function() {
       this.$refs.authModalLogIn.show();
     },
     logOut: function() {
-      this.$store.commit("logOut");
+      this.$store.dispatch("logOut");
     },
     signUp: function() {
       this.$refs.authModal.show();

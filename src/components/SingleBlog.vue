@@ -1,13 +1,16 @@
 <template>
   <div class="single-post">
     <h2>{{blog.title | toUpperCase}}</h2>
-    <p>{{blog.content}}</p>
+    <p v-if="!blog.isMarkdown">{{blog.content}}</p>
+    <div v-if="blog.isMarkdown">
+      <markdown-preview v-bind:content="blog.content" v-bind:displayMode="true" />
+    </div>
     <div class="post-information">
       <p>Submitted by: {{blog.author}}</p>
       <p>Date: {{blog.timestamp | formatTimestamp}}</p>
     </div>
-    <div>
-      <img id="blog-img" height="150" />
+    <div v-if="blog.imageId">
+      <img v-bind:src="imageSrc" height="150" />
     </div>
     <div class="comment-links">
       <add-comment-modal ref="addCommentModal" v-bind:blogId="blog.id" />
@@ -20,18 +23,21 @@
 <script>
 import Comments from "./Comments";
 import AddCommentModal from "./AddCommentModal";
+import MarkdownPreview from "./MarkdownPreview";
 import { Storage } from "../firebase/storage";
 import { mapState } from "vuex";
 
 export default {
   components: {
     comments: Comments,
-    "add-comment-modal": AddCommentModal
+    "add-comment-modal": AddCommentModal,
+    "markdown-preview": MarkdownPreview
   },
   props: ["blog"],
   data() {
     return {
-      showComments: false
+      showComments: false,
+      imageSrc: null
     };
   },
   computed: {
@@ -48,8 +54,8 @@ export default {
         .child(`images/${this.blog.imageId}`)
         .getDownloadURL()
         .then(url => {
-          const img = document.getElementById("blog-img");
-          img.src = url;
+          // const img = document.getElementById("blog-img");
+          this.imageSrc = url;
         })
         .catch(err => console.log(err));
     }

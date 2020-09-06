@@ -70,6 +70,7 @@ export default {
 
 .blog-container {
   margin: auto;
+  width: 80%;
 }
 
 .single-blog {

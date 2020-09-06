@@ -32,10 +32,6 @@ export const store = new Vuex.Store({
             state.signedIn = false;
             state.user.name = ""
             state.user.id = null
-        },
-        setUser: (state, payload) => {
-            state.user.name = payload.name
-            state.user.id = payload.id
         }
     },
     actions: {
@@ -97,7 +93,10 @@ export const store = new Vuex.Store({
         },
         addNewBlog: (context, blog) => {
             // create a unique identifier for the image's location and retrieval
-            let imageId = uuidv4();
+            let imageId = null
+            if (blog.selectedImage) {
+                imageId = uuidv4();
+            }
             DB.collection("posts")
                 .doc()
                 .set({
@@ -106,10 +105,12 @@ export const store = new Vuex.Store({
                     topic: blog.topic,
                     timestamp: Date.now(),
                     author: context.state.user.name,
-                    imageId: imageId
+                    imageId: imageId,
+                    isMarkdown: blog.isMarkdown
                 })
                 .then(() => {
-                    if (blog.selectedImage) {
+                    if (imageId) {
+                        console.log('blog.selectedImage: ', blog.selectedImage)
                         // upload image to firebase storage
                         const ref = Storage.ref().child('images/' + imageId)
                         ref.put(blog.selectedImage)

@@ -7,7 +7,27 @@
         <v-card-text>
           <v-form class="mt-5 px-3" ref="form">
             <v-text-field v-model="blog.title" label="Title" :rules="inputRulesTitle"></v-text-field>
-            <v-textarea v-model="blog.content" label="Content" :rules="inputRulesContent"></v-textarea>
+
+            <v-row align="center" justify="space-around">
+              <v-switch
+                v-model="blog.isMarkdown"
+                class="ma-2"
+                label="Is your content formatted in Markdown?"
+              ></v-switch>
+            </v-row>
+
+            <v-textarea
+              v-model="blog.content"
+              label="Content"
+              :rules="inputRulesContent"
+              @keyup="getContent"
+              rows="4"
+            ></v-textarea>
+
+            <div v-if="blog.isMarkdown">
+              <p class="mt-10">Markdown preview</p>
+              <span v-html="markdownHtml"></span>
+            </div>
           </v-form>
         </v-card-text>
 
@@ -24,12 +44,15 @@
 
 
 <script>
+import showdown from "showdown";
 import { mapState } from "vuex";
 
 export default {
+  components: {},
   data() {
     return {
       dialog: false,
+      markdownHtml: "",
       blog: {
         title: "",
         content: "",
@@ -64,9 +87,15 @@ export default {
       });
       fileReader.readAsDataURL(files[0]);
     },
+    getContent() {
+      const converter = new showdown.Converter();
+      this.markdownHtml = converter.makeHtml(this.blog.content);
+    },
     close() {
-      this.dialog = false;
-      this.$store.dispatch("addNewBlog", this.blog);
+      if (this.$refs.form.validate()) {
+        this.dialog = false;
+        this.$store.dispatch("addNewBlog", this.blog);
+      }
     }
   }
 };

@@ -8,9 +8,14 @@
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
-    <v-card-text>
-      <div>{{blog.content}}</div>
-    </v-card-text>
+    <div v-if="!blog.isMarkdown">
+      <v-card-text>
+        <div>{{blog.content}}</div>
+      </v-card-text>
+    </div>
+    <div v-if="blog.isMarkdown" class="ma-5">
+      <span v-html="markdownHtml"></span>
+    </div>
 
     <v-divider class="mx-4"></v-divider>
 
@@ -28,28 +33,22 @@
       >{{ `${showComments? 'Hide': 'View'} Comments (${blog.comments.length})`}}</v-btn>
     </v-card-actions>
 
-    <!-- <v-scroll-y-transition group v-show="showComments"> -->
     <v-list v-show="showComments">
       <v-divider class="mx-4"></v-divider>
       <v-list-item v-for="comment in blog.comments" v-bind:key="comment.content">
         <v-list-item-title v-text="comment.content"></v-list-item-title>
       </v-list-item>
     </v-list>
-    <!-- </v-scroll-y-transition> -->
   </v-card>
 </template>
 
 <script>
-// import Comments from "./Comments";
-// import MarkdownPreview from "./MarkdownPreview";
+import showdown from "showdown";
 import { Storage } from "../firebase/storage";
 import { mapState } from "vuex";
 
 export default {
-  components: {
-    // comments: Comments,
-    // "markdown-preview": MarkdownPreview
-  },
+  components: {},
   props: {
     blog: {
       type: Object,
@@ -58,6 +57,7 @@ export default {
   },
   data() {
     return {
+      markdownHtml: "",
       imageSrc: null,
       showComments: false
     };
@@ -74,6 +74,12 @@ export default {
           this.imageSrc = url;
         })
         .catch(err => console.log(err));
+    }
+
+    // Convert the markdown to HTML
+    if (this.blog.isMarkdown) {
+      const converter = new showdown.Converter();
+      this.markdownHtml = converter.makeHtml(this.blog.content);
     }
   },
   filters: {

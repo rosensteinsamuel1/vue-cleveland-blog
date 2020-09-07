@@ -2,9 +2,11 @@
   <v-card class="mx-auto my-12" max-width="400">
     <v-img v-bind:src="imageSrc" max-width="400"></v-img>
     <v-card-title>{{blog.title}}</v-card-title>
+
     <v-card-text>
       <div>Published by: {{blog.author}}</div>
     </v-card-text>
+
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
       <div>{{blog.content}}</div>
@@ -20,8 +22,8 @@
 
     <v-card-actions v-if="blog.comments">
       <v-btn
-        flat
         color="primary mx-0 mt-3"
+        text
         @click="showComments = !showComments"
       >{{ `${showComments? 'Hide': 'View'} Comments (${blog.comments.length})`}}</v-btn>
     </v-card-actions>

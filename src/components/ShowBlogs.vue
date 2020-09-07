@@ -14,6 +14,7 @@
             v-model="search"
             placeholder="Search blogs or authors"
           />
+
           <v-container v-for="blog in filterBlogs" v-bind:key="blog.id">
             <!-- <router-link v-bind:to="'/blog/' + blog.id"> -->
             <single-blog-vuetify v-bind:blog="blog" />

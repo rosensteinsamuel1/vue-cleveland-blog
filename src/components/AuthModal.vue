@@ -117,35 +117,36 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-$baby-blue: #e1faff;
+// <style scoped lang="scss">
+// $baby-blue: #e1faff;
 
-/** AUTHMODAL STYLING (inside of the Modal component) */
-/deep/ .authModalContainer {
-  background: black;
-  max-width: 450px;
-  padding: 0;
+// /** AUTHMODAL STYLING (inside of the Modal component) */
+// .authModalContainer {
+//   background: black;
+//   max-width: 450px;
+//   padding: 0;
 
-  h2 {
-    color: white;
-  }
+//   h2 {
+//     color: white;
+//   }
 
-  form div {
-    display: flex;
-    flex-direction: column;
+//   form div {
+//     display: flex;
+//     flex-direction: column;
 
-    input {
-      background-color: $baby-blue;
-      margin: 10px 0;
-      padding: 5px;
-      height: 3.8rem;
-    }
-  }
+//     input {
+//       background-color: $baby-blue;
+//       margin: 10px 0;
+//       padding: 5px;
+//       height: 3.8rem;
+//     }
+//   }
 
-  .btn-submit {
-    height: 50px;
-    width: 100%;
-    margin: 0px;
-  }
-}
+//   .btn-submit {
+//     height: 50px;
+//     width: 100%;
+//     margin: 0px;
+//   }
+// }
+//
 </style>

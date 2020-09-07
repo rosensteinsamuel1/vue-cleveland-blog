@@ -1,6 +1,7 @@
 <template>
   <div>
-    <app-header />
+    <!-- <app-header /> -->
+    <navbar />
     <div id="show-blogs">
       <div class="blog-container">
         <div id="loading" v-if="loading">
@@ -26,13 +27,16 @@
 
 <script>
 import SingleBlog from "./SingleBlog";
-import Header from "./Header";
+// import Header from "./Header";
+import Navbar from "./Navbar";
+
 import { mapState } from "vuex";
 
 export default {
   components: {
     "single-blog": SingleBlog,
-    "app-header": Header
+    // "app-header": Header,
+    navbar: Navbar
   },
   data() {
     return {

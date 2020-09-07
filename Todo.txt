@@ -10,6 +10,7 @@
     - Restructure FB rules
     - Save local user
     - Keep user signed in after refresh of page
+    - Improve (error) messages for: (a) successful login/logout. (b) unsucessful login/logout
 - Markdown support
 - Image uploads - sDONE
 - Clean up styling 

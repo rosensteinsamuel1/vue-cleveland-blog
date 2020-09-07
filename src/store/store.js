@@ -78,7 +78,7 @@ export const store = new Vuex.Store({
                 .doc(uid)
                 .get()
                 .then(doc => {
-                    console.log("doc.data(): ", doc);
+                    console.log("doc.data() ", doc.data());
                     context.commit('signInUser', {
                         name: doc.data().username,
                         id: doc.id

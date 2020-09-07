@@ -6,12 +6,14 @@
       </li>
       <!-- Options for users that are NOT logged in -->
       <li v-if="!signedIn">
-        <auth-modal ref="authModalLogIn" v-bind:newUser="false" />
-        <a href="#" v-on:click="logIn">Log In</a>
+        <!-- <auth-modal ref="authModalLogIn" v-bind:newUser="false" />
+        <a href="#" v-on:click="logIn">Log In</a>-->
+        <signup-popup />
       </li>
       <li v-if="!signedIn">
-        <auth-modal ref="authModal" v-bind:newUser="true" />
-        <a href="#" v-on:click="signUp">Sign Up</a>
+        <!-- <auth-modal ref="authModal" v-bind:newUser="true" />
+        <a href="#" v-on:click="signUp">Sign Up</a>-->
+        <login-popup />
       </li>
 
       <!-- Options for users that are logged in -->
@@ -31,13 +33,15 @@
 
 <script>
 import AddBlogModal from "./AddBlogModal";
-import AuthModal from "./AuthModal";
+import LoginPopup from "./LoginPopup";
+import SignUpPopup from "./SignUpPopup";
 import { mapState } from "vuex";
 
 export default {
   components: {
     "add-blog-modal": AddBlogModal,
-    "auth-modal": AuthModal
+    "login-popup": LoginPopup,
+    "signup-popup": SignUpPopup
   },
   data() {
     return {

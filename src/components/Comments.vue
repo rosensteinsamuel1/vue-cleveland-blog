@@ -16,25 +16,25 @@
 
     <!-- Add new comment if signed in -->
 
-    <add-comment-modal ref="addCommentModal" v-bind:blogId="blogId" />
-    <a href="#" v-if="signedIn" v-on:click="addComment" class="add-comment">Add Comment</a>
+    <add-comment-popup ref="addCommentPopup" v-bind:blogId="blogId" />
+    <a href="#" v-if="signedIn" v-on:click="addCommentOpen" class="add-comment">Add Comment</a>
 
-    <auth-modal ref="authModalLogin" />
-    <a href="#" v-if="!signedIn" v-on:click="logIn" class="add-comment">Sign in to comment</a>
+    <a href="#" v-if="!signedIn" class="add-comment">Sign in to comment</a>
   </div>
 </template>
 
 <script>
 import Comment from "./Comment";
-import AddCommentModal from "./AddCommentModal";
-import AuthModal from "./AuthModal";
+// import AddCommentModal from "./AddCommentModal";
+import AddCommentPopup from "./AddCommentPopup";
+
 import { mapState } from "vuex";
 
 export default {
   components: {
     comment: Comment,
-    "add-comment-modal": AddCommentModal,
-    "auth-modal": AuthModal
+    "add-comment-popup": AddCommentPopup
+    // "add-comment-modal": AddCommentModal
   },
   props: {
     comments: {
@@ -55,11 +55,8 @@ export default {
     ...mapState(["signedIn"])
   },
   methods: {
-    addComment: function() {
-      this.$refs.addCommentModal.show();
-    },
-    logIn: function() {
-      this.$refs.authModalLogin.show();
+    addCommentOpen() {
+      this.$refs.addCommentPopup.open();
     }
   }
 };

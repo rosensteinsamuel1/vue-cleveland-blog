@@ -1,10 +1,6 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
-      <!-- <template v-slot:activator="{ on, attrs }">
-        <v-btn color="blue lighten-2" dark v-bind="attrs" v-on="on">Log In</v-btn>
-      </template>-->
-
       <v-card>
         <v-card-title class="headline grey lighten-2">Log In</v-card-title>
 
@@ -42,7 +38,7 @@ export default {
   },
   methods: {
     open() {
-      this.dialog = true
+      this.dialog = true;
     },
     close() {
       if (this.$refs.form.validate()) {

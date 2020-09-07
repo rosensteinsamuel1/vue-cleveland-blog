@@ -14,11 +14,11 @@
             v-model="search"
             placeholder="Search blogs or authors"
           />
-          <div class="single-blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
+          <v-container v-for="blog in filterBlogs" v-bind:key="blog.id">
             <!-- <router-link v-bind:to="'/blog/' + blog.id"> -->
-            <single-blog v-bind:blog="blog" />
+            <single-blog-vuetify v-bind:blog="blog" />
             <!-- </router-link> -->
-          </div>
+          </v-container>
         </div>
       </div>
     </div>
@@ -26,15 +26,16 @@
 </template>
 
 <script>
-import SingleBlog from "./SingleBlog";
+// import SingleBlog from "./SingleBlog";
 // import Header from "./Header";
+import SingleBlogVuetify from "./SingleBlogVuetify";
 import Navbar from "./Navbar";
 
 import { mapState } from "vuex";
 
 export default {
   components: {
-    "single-blog": SingleBlog,
+    "single-blog-vuetify": SingleBlogVuetify,
     // "app-header": Header,
     navbar: Navbar
   },

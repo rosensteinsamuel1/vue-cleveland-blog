@@ -21,6 +21,7 @@ export const store = new Vuex.Store({
     mutations: {
         getBlogs: (state, payload) => {
             state.blogs = payload
+            state.filterBlogs = payload
             state.loading = false;
         },
         signInUser: (state, payload) => {
@@ -32,6 +33,18 @@ export const store = new Vuex.Store({
             state.signedIn = false;
             state.user.name = ""
             state.user.id = null
+        },
+        search: (state, payload) => {
+            payload = payload.toLowerCase();
+            state.filterBlogs = state.blogs.filter(blog => {
+                console.log(blog)
+                return (
+                    blog.title.toLowerCase().match(payload) ||
+                    blog.content.toLowerCase().match(payload) ||
+                    blog.author.toLowerCase().match(payload)
+                );
+            });
+
         }
     },
     actions: {

@@ -1,34 +1,22 @@
 <template>
   <div>
-    <!-- <app-header /> -->
     <navbar />
     <div id="show-blogs">
-      <div class="blog-container">
-        <div id="loading" v-if="loading">
-          <h4>Posts are loading...</h4>
-        </div>
+      <v-container class="blog-container">
+        <v-container text-center>
+          <v-progress-circular v-if="loading" class="ma-10 center" indeterminate color="primary"></v-progress-circular>
+        </v-container>
         <div id="all-blogs" v-if="!loading">
-          <input
-            class="search-bar"
-            type="text"
-            v-model="search"
-            placeholder="Search blogs or authors"
-          />
-
           <v-container v-for="blog in filterBlogs" v-bind:key="blog.id">
-            <!-- <router-link v-bind:to="'/blog/' + blog.id"> -->
             <single-blog-vuetify v-bind:blog="blog" />
-            <!-- </router-link> -->
           </v-container>
         </div>
-      </div>
+      </v-container>
     </div>
   </div>
 </template>
 
 <script>
-// import SingleBlog from "./SingleBlog";
-// import Header from "./Header";
 import SingleBlogVuetify from "./SingleBlogVuetify";
 import Navbar from "./Navbar";
 
@@ -37,53 +25,13 @@ import { mapState } from "vuex";
 export default {
   components: {
     "single-blog-vuetify": SingleBlogVuetify,
-    // "app-header": Header,
     navbar: Navbar
   },
-  data() {
-    return {
-      search: ""
-    };
-  },
   computed: {
-    ...mapState(["loading", "blogs"]),
-    filterBlogs: function() {
-      return this.$store.state.blogs.filter(blog => {
-        console.log(blog);
-        return (
-          blog.title.toLowerCase().match(this.search) ||
-          blog.content.toLowerCase().match(this.search) ||
-          blog.author.toLowerCase().match(this.search)
-        );
-      });
-    }
+    ...mapState(["loading", "filterBlogs"])
   },
   created: function() {
     this.$store.dispatch("getBlogs");
   }
 };
 </script>
-
-<style scoped>
-#show-blogs {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-}
-
-.blog-container {
-  margin: auto;
-  width: 80%;
-}
-#loading {
-  margin-top: 25px auto;
-}
-
-.search-bar {
-  padding: 2px;
-  font-size: 1rem;
-  margin: 0 auto;
-  display: block;
-  width: 60%;
-}
-</style>

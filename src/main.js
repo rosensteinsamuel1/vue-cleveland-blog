@@ -7,6 +7,8 @@ Vue.use(firestorePlugin);
 import { store } from './store/store'
 import routes from './routes'
 import vuetify from './plugins/vuetify';
+// Support icons for Vuetify
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
 

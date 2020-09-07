@@ -6,6 +6,18 @@
         <span>Blog</span>
       </v-toolbar-title>
       <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-text-field
+        class="mr-20"
+        v-model="search"
+        hide-details
+        prepend-icon="search"
+        single-line
+        v-on:keyup="searchPress"
+        placeholder="Search blogs or authors"
+      ></v-text-field>
+
       <!-- Options for user who isn't signed in -->
       <signup-popup ref="signupPopup" />
       <v-btn v-if="!signedIn" v-on:click="signupOpen">Sign Up</v-btn>
@@ -32,15 +44,22 @@ import { mapState } from "vuex";
 
 export default {
   components: {
-    // "add-blog-modal": AddBlogModal,
     "new-blog-popup": NewBlogPopup,
     "login-popup": LoginPopup,
     "signup-popup": SignUpPopup
+  },
+  data() {
+    return {
+      search: ""
+    };
   },
   computed: {
     ...mapState(["signedIn", "user"])
   },
   methods: {
+    searchPress() {
+      this.$store.commit("search", this.search);
+    },
     signupOpen() {
       this.$refs.signupPopup.open();
     },

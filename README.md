@@ -1,8 +1,8 @@
-# vue-cleveland-blog
+# MrBlog
 The current master branch of the project can be viewed at:
 https://objective-northcutt-7d4ccf.netlify.app/
 
-This is a quick, simple project to demonstrate the knowledge of basic VueJS concepts (components, props, routes, etc). The application uses a Firebase backend that contains posts about how difficult it is to be a sports fan from Cleveland, OH. 
+This is a quick, simple project to demonstrate the knowledge of basic VueJS concepts (components, props, routes, etc). This is a general Blog application that can be altered how you see fit.  
 
 Features:
 * Authentication using Firebase authentication

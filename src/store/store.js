@@ -124,16 +124,19 @@ export const store = new Vuex.Store({
                     timestamp: Date.now(),
                     author: context.state.user.name,
                     imageId: imageId,
-                    isMarkdown: blog.isMarkdown
+                    isMarkdown: blog.isMarkdown,
+                    authorId: context.state.user.id
                 })
                 .then(() => {
                     if (imageId) {
                         console.log('blog.selectedImage: ', blog.selectedImage)
                         // upload image to firebase storage
                         const ref = Storage.ref().child('images/' + imageId)
-                        ref.put(blog.selectedImage)
+                        ref.put(blog.selectedImage).then(() => { console.log('image saved') })
                     }
-                })
+                }
+
+                )
         }
     }
 })

@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto my-5" max-width="400">
-    <v-img v-bind:src="imageSrc" max-width="400"></v-img>
+    <v-img v-if="blog.imageId" v-bind:src="imageSrc" max-width="400" max-height="350"></v-img>
     <v-card-title>{{blog.title}}</v-card-title>
 
     <v-card-text>
@@ -25,9 +25,12 @@
       </v-chip-group>
     </v-card-text>
 
-    <v-card-actions v-if="blog.comments">
+    <v-card-actions>
+      <add-comment-popup ref="addCommentPopup" :blogId="blog.id" />
+      <v-btn v-if="signedIn" color="primary mx-0 mt-3" text @click="addComment">Add a Comment</v-btn>
       <v-btn
         color="primary mx-0 mt-3"
+        v-if="blog.comments"
         text
         @click="showComments = !showComments"
       >{{ `${showComments? 'Hide': 'View'} Comments (${blog.comments.length})`}}</v-btn>
@@ -43,12 +46,15 @@
 </template>
 
 <script>
+import AddCommentPopup from "./AddCommentPopup";
 import showdown from "showdown";
 import { Storage } from "../firebase/storage";
 import { mapState } from "vuex";
 
 export default {
-  components: {},
+  components: {
+    "add-comment-popup": AddCommentPopup
+  },
   props: {
     blog: {
       type: Object,
@@ -64,6 +70,12 @@ export default {
   },
   computed: {
     ...mapState(["signedIn"])
+  },
+  methods: {
+    addComment() {
+      console.log("addcomment");
+      this.$refs.addCommentPopup.open();
+    }
   },
   created() {
     if (this.blog.imageId) {

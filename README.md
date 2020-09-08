@@ -14,7 +14,7 @@ Features:
 
 Next Steps:
 * Implment testing (unit, end to end)
-* Better error handeling for login/signup
+* Have a profile page where user can view their posts/comments
 
 ## Project setup
 ```

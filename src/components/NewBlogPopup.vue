@@ -30,7 +30,12 @@
             </div>
           </v-form>
         </v-card-text>
-
+        <v-card-text>
+          <input type="file" @change="onFileSelected" accept="image/*" />
+        </v-card-text>
+        <v-card-text>
+          <img v-if="imageUrl" v-bind:src="imageUrl" alt height="150" />
+        </v-card-text>
         <v-divider></v-divider>
 
         <v-card-actions>

@@ -1,10 +1,6 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
-      <!-- <template v-slot:activator="{ on, attrs }">
-        <v-btn color="blue lighten-2" dark v-bind="attrs" v-on="on">Sign Up</v-btn>
-      </template> -->
-
       <v-card>
         <v-card-title class="headline grey lighten-2">Sign Up</v-card-title>
 
@@ -17,6 +13,9 @@
         </v-card-text>
 
         <v-divider></v-divider>
+        <v-card-text v-if="error">
+          <p class="red--text">{{error}}</p>
+        </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -39,6 +38,7 @@ export default {
       email: "",
       password: "",
       username: "",
+      error: "",
       inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"]
     };
   },
@@ -47,11 +47,10 @@ export default {
   },
   methods: {
     open() {
-      this.dialog = true
+      this.dialog = true;
     },
     close() {
       if (this.$refs.form.validate()) {
-        this.dialog = false;
         // Create new user in Firebase
         Auth.createUserWithEmailAndPassword(this.email, this.password)
           .then(created => {
@@ -61,9 +60,11 @@ export default {
               username: this.username,
               email: this.email
             });
+            this.error = null;
+            this.dialog = false;
           })
           .catch(error => {
-            this.errors.push(error.message);
+            this.error = `${error.message} [${error.code}]`;
           });
       }
     }

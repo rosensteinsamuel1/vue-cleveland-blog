@@ -12,6 +12,9 @@
         </v-card-text>
 
         <v-divider></v-divider>
+        <v-card-text v-if="error">
+          <p class="red--text">{{error}}</p>
+        </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -33,6 +36,7 @@ export default {
       email: "",
       password: "",
       username: "",
+      error: "",
       inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"]
     };
   },
@@ -42,16 +46,17 @@ export default {
     },
     close() {
       if (this.$refs.form.validate()) {
-        this.dialog = false;
         // Log in with existing user
         Auth.signInWithEmailAndPassword(this.email, this.password)
           .then(response => {
             console.log(response.user.uid);
             // retrieve user data from Firestore
             this.$store.dispatch("getUserInfo", response.user.uid);
+            this.error = null;
+            this.dialog = false;
           })
-          .catch(err => {
-            console.log(err);
+          .catch(error => {
+            this.error = `${error.message} [${error.code}]`;
           });
       }
     }

@@ -19,10 +19,14 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
-        getBlogs: (state, payload) => {
-            state.blogs = payload
-            state.filterBlogs = payload
-            state.loading = false;
+        addBlog: (state, payload) => {
+            state.blogs.push(payload)
+            state.filterBlogs = state.blogs.sort((a, b) => {
+                return b.timestamp - a.timestamp;
+            })
+        },
+        doneLoading: (state) => {
+            state.loading = false
         },
         signInUser: (state, payload) => {
             state.signedIn = true
@@ -44,18 +48,19 @@ export const store = new Vuex.Store({
                     blog.author.toLowerCase().match(payload)
                 );
             });
-
         }
     },
     actions: {
         getBlogs: (context) => {
             context.loading = true
-            DB.collection('posts').get().then(result => {
-                const _blogs = []
-                result.docs.map(doc => {
-                    _blogs.push({ ...doc.data(), id: doc.id })
+            DB.collection('posts').onSnapshot(result => {
+                const changes = result.docChanges();
+                changes.forEach(change => {
+                    if (change.type === 'added') {
+                        context.commit('addBlog', { ...change.doc.data(), id: change.doc.id })
+                    }
                 })
-                context.commit('getBlogs', _blogs)
+                context.commit('doneLoading')
             })
         },
         retrieveUser: (context) => {

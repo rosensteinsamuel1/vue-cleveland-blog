@@ -83,6 +83,7 @@ export default {
     },
     onFileSelected(event) {
       const files = event.target.files;
+
       this.blog.selectedImage = files[0];
 
       // preview image in DOM

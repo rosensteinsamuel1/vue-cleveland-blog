@@ -13,6 +13,9 @@ export const actions = {
                     context.commit('addBlog', { ...change.doc.data(), id: change.doc.id })
                 }
                 if (change.type === 'modified') {
+                    // remove old blog
+                    context.commit('removeBlog', change.doc.id)
+                    // add modified blog
                     context.commit('addBlog', { ...change.doc.data(), id: change.doc.id })
                 }
             })

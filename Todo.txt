@@ -4,18 +4,18 @@
 - Comments- DONE
     - View and hide comments from all blogs view- DONE
     - Save comments to firestore- DONE
-    - Listen for new comments
+    - Listen for new comments - DONE
     - Refactor all HTTP calls to Vuex store
 - Authentication
     - Reconfigure the 'add-post' component from root- DONE
     - Restructure FB rules
-    - Save local user
+    - Save local user - DONE
     - Keep user signed in after refresh of page
     - Improve (error) messages for: (a) successful login/logout. (b) unsucessful login/logout
 - Markdown support
 - Image uploads -
     - Resize images
-    - (Listen for upload completed before downloading) Load image when blog is first posted
+    - (Listen for upload completed before downloading) Load image when blog is first posted- DONE
 - Clean up styling 
 
 Create button on single blog to return to list of blogs- DONE

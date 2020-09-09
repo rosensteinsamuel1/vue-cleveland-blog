@@ -7,9 +7,19 @@
           <v-progress-circular v-if="loading" class="ma-10 center" indeterminate color="primary"></v-progress-circular>
         </v-container>
         <div id="all-blogs" v-if="!loading">
-          <v-container v-for="blog in filterBlogs" v-bind:key="blog.id">
-            <single-blog-vuetify v-bind:blog="blog" />
-          </v-container>
+          <v-row>
+            <v-col
+              cols="12"
+              xs="12"
+              md="6"
+              lg="4"
+              xl="3"
+              v-for="blog in filterBlogs"
+              v-bind:key="blog.id"
+            >
+              <single-blog-vuetify v-bind:blog="blog" />
+            </v-col>
+          </v-row>
         </div>
       </v-container>
     </div>

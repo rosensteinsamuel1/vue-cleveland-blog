@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-5" max-width="400">
+  <v-card class="mx-auto my-5" max-width="370">
     <v-img v-if="blog.imageId" v-bind:src="imageSrc" max-width="400" max-height="350"></v-img>
     <v-card-title>{{blog.title}}</v-card-title>
 

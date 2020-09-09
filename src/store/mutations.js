@@ -2,6 +2,11 @@ export const mutations = {
     addBlog: (state, blog) => {
         state.blogs.push(blog)
     },
+    removeBlog: (state, modifiedId) => {
+        state.blogs = state.blogs.filter(blog => {
+            return blog.id != modifiedId
+        })
+    },
     doneLoading: (state) => {
         state.loading = false
     },

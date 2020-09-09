@@ -34,7 +34,7 @@
           <input type="file" @change="onFileSelected" accept="image/*" />
         </v-card-text>
         <v-card-text>
-          <img v-if="imageUrl" v-bind:src="imageUrl" alt height="150" />
+          <v-img v-if="imageUrl" v-bind:src="imageUrl" alt height="150" />
         </v-card-text>
         <v-divider></v-divider>
 
@@ -61,13 +61,10 @@ export default {
       blog: {
         title: "",
         content: "",
-        topic: "",
         selectedImage: null,
-        timestamp: Date.now(),
         isMarkdown: false
       },
       imageUrl: null,
-      submitted: false,
       inputRulesTitle: [v => v.length > 0 || "The title can't be empty"],
       inputRulesContent: [
         v => v.length >= 10 || "This content must have at least 10 characters"

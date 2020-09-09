@@ -11,10 +11,10 @@
       <v-text-field
         class="mr-20"
         v-model="search"
+        v-on:keydown="searchInput"
         hide-details
         prepend-icon="search"
         single-line
-        v-on:keyup="searchPress"
         placeholder="Search blogs or authors"
       ></v-text-field>
 
@@ -57,8 +57,8 @@ export default {
     ...mapState(["signedIn", "user"])
   },
   methods: {
-    searchPress() {
-      this.$store.commit("search", this.search);
+    searchInput() {
+      this.$store.state.search = this.search;
     },
     signupOpen() {
       this.$refs.signupPopup.open();

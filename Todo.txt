@@ -4,6 +4,7 @@
 - Comments- DONE
     - View and hide comments from all blogs view- DONE
     - Save comments to firestore- DONE
+    - Listen for new comments
     - Refactor all HTTP calls to Vuex store
 - Authentication
     - Reconfigure the 'add-post' component from root- DONE
@@ -12,7 +13,9 @@
     - Keep user signed in after refresh of page
     - Improve (error) messages for: (a) successful login/logout. (b) unsucessful login/logout
 - Markdown support
-- Image uploads - sDONE
+- Image uploads -
+    - Resize images
+    - (Listen for upload completed before downloading) Load image when blog is first posted
 - Clean up styling 
 
 Create button on single blog to return to list of blogs- DONE
@@ -23,7 +26,7 @@ Create button on single blog to return to list of blogs- DONE
 - Create mixin for toUppercase() and timestamp calculation (instead of repeating filter)
 - Style single blogs
 - Style list of blogs
-- Create modal for adding a blog
+- Create modal for adding a blog- DONE
 - Remove link styling when viewing all blogs- DONE
 
 - Restructuring:

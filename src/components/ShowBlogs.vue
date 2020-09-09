@@ -20,7 +20,7 @@
 import SingleBlogVuetify from "./SingleBlogVuetify";
 import Navbar from "./Navbar";
 
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -28,7 +28,8 @@ export default {
     navbar: Navbar
   },
   computed: {
-    ...mapState(["loading", "filterBlogs"])
+    ...mapState(["loading"]),
+    ...mapGetters(["filterBlogs"])
   },
   created: function() {
     this.$store.dispatch("getBlogs");

@@ -30,6 +30,7 @@
 import SingleBlogVuetify from "./SingleBlogVuetify";
 import Navbar from "./Navbar";
 
+import { GET_BLOGS } from "../store/action-types";
 import { mapState, mapGetters } from "vuex";
 
 export default {
@@ -42,7 +43,7 @@ export default {
     ...mapGetters(["filterBlogs"])
   },
   created: function() {
-    this.$store.dispatch("getBlogs");
+    this.$store.dispatch(GET_BLOGS);
   }
 };
 </script>

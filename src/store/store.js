@@ -19,9 +19,7 @@ export const store = new Vuex.Store({
     },
     getters: {
         filterBlogs: state => {
-            const orderedBlogs = state.blogs.sort((a, b) => {
-                return b.timestamp - a.timestamp;
-            })
+            const orderedBlogs = state.blogs.sort((a, b) => b.timestamp - a.timestamp)
             return orderedBlogs.filter(blog => {
                 return (
                     blog.title.toLowerCase().match(state.search) ||

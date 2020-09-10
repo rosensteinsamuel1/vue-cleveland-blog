@@ -11,7 +11,7 @@
     - Restructure FB rules
     - Save local user - DONE
     - Keep user signed in after refresh of page
-    - Improve (error) messages for: (a) successful login/logout. (b) unsucessful login/logout
+    - Improve (error) messages for: (a) successful login/USER_LOG_OUT. (b) unsucessful login/USER_LOG_OUT
 - Markdown support
 - Image uploads -
     - Resize images

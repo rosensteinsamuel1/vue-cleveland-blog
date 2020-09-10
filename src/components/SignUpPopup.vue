@@ -31,6 +31,8 @@
 import { mapState } from "vuex";
 import { Auth } from "../firebase/auth";
 
+import { USER_NEW_SIGN_IN } from "../store/action-types";
+
 export default {
   data() {
     return {
@@ -55,7 +57,7 @@ export default {
         Auth.createUserWithEmailAndPassword(this.email, this.password)
           .then(created => {
             // Save new user to Firestore
-            this.$store.dispatch("signInNewUser", {
+            this.$store.dispatch(USER_NEW_SIGN_IN, {
               id: created.user.uid,
               username: this.username,
               email: this.email

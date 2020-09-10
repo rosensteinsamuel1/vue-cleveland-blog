@@ -28,6 +28,7 @@
 
 <script>
 import { Auth } from "../firebase/auth";
+import { USER_GET_INFO } from "../store/action-types";
 
 export default {
   data() {
@@ -51,7 +52,7 @@ export default {
           .then(response => {
             console.log(response.user.uid);
             // retrieve user data from Firestore
-            this.$store.dispatch("getUserInfo", response.user.uid);
+            this.$store.dispatch(USER_GET_INFO, response.user.uid);
             this.error = null;
             this.dialog = false;
           })

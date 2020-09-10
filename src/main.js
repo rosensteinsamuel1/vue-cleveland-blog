@@ -5,6 +5,7 @@ import { firestorePlugin } from 'vuefire';
 Vue.use(firestorePlugin);
 
 import { store } from './store/store'
+import { USER_CHECK_LOGGED_IN } from './store/action-types'
 import routes from './routes'
 import vuetify from './plugins/vuetify';
 // Support icons for Vuetify
@@ -21,7 +22,7 @@ new Vue({
   el: '#app',
 
   created() {
-    this.$store.dispatch("retrieveUser");
+    this.$store.dispatch(USER_CHECK_LOGGED_IN);
   },
 
   render: h => h(App),

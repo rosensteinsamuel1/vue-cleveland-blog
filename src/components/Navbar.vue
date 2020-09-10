@@ -11,7 +11,7 @@
       <v-text-field
         class="mr-20"
         v-model="search"
-        v-on:keydown="searchInput"
+        v-on:keyup="searchInput"
         hide-details
         prepend-icon="search"
         single-line
@@ -41,6 +41,7 @@ import NewBlogPopup from "./NewBlogPopup";
 import LoginPopup from "./LoginPopup";
 import SignUpPopup from "./SignUpPopup";
 import { mapState } from "vuex";
+import { USER_LOG_OUT } from "../store/action-types";
 
 export default {
   components: {
@@ -67,7 +68,7 @@ export default {
       this.$refs.loginPopup.open();
     },
     logOut() {
-      this.$store.dispatch("logOut");
+      this.$store.dispatch(USER_LOG_OUT);
     },
     addBlogOpen: function() {
       this.$refs.newBlogPopup.show();

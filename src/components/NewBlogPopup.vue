@@ -51,6 +51,7 @@
 <script>
 import showdown from "showdown";
 import { mapState } from "vuex";
+import { ADD_NEW_BLOG } from "../store/action-types";
 
 export default {
   components: {},
@@ -97,7 +98,7 @@ export default {
     close() {
       if (this.$refs.form.validate()) {
         this.dialog = false;
-        this.$store.dispatch("addNewBlog", this.blog);
+        this.$store.dispatch(ADD_NEW_BLOG, this.blog);
       }
     }
   }

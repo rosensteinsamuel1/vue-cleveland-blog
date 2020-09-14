@@ -25,7 +25,6 @@
   </div>
 </template>
 
-
 <script>
 import { Auth } from "../firebase/auth";
 import { USER_GET_INFO } from "../store/action-types";

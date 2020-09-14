@@ -20,7 +20,6 @@ const router = new VueRouter({ routes: routes, mode: 'history' })
 new Vue({
   store: store,
   el: '#app',
-
   created() {
     this.$store.dispatch(USER_CHECK_LOGGED_IN);
   },

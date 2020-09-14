@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPopup Component matches snapshot 1`] = `
+<div class="text-center">
+  <v-dialog-stub opendelay="0" closedelay="0" contentclass="" maxwidth="none" origin="center center" retainfocus="true" transition="dialog-transition" width="500">
+    <v-card-stub loaderheight="4" tag="div">
+      <v-card-title-stub class="headline grey lighten-2">Log In</v-card-title-stub>
+      <v-card-text-stub>
+        <v-form-stub class="mt-5 px-3">
+          <v-text-field-stub errorcount="1" errormessages="" messages="" rules="function (v) {
+        return v.length >= 3 || &quot;Minimum length is 3 characters&quot;;
+      }" successmessages="" value="" backgroundcolor="" label="Email" loaderheight="2" clearicon="$clear" type="text"></v-text-field-stub>
+          <v-text-field-stub errorcount="1" errormessages="" messages="" rules="function (v) {
+        return v.length >= 3 || &quot;Minimum length is 3 characters&quot;;
+      }" successmessages="" value="" backgroundcolor="" label="Password" loaderheight="2" clearicon="$clear" type="password"></v-text-field-stub>
+        </v-form-stub>
+      </v-card-text-stub>
+      <v-divider-stub></v-divider-stub>
+      <!---->
+      <v-card-actions-stub>
+        <v-spacer-stub></v-spacer-stub>
+        <v-btn-stub color="primary mx-0 mt-3" tag="button" activeclass="" text="true" type="button">Log In</v-btn-stub>
+      </v-card-actions-stub>
+    </v-card-stub>
+  </v-dialog-stub>
+</div>
+`;
+
+exports[`LoginPopup Component renders 1`] = `
+<div class="text-center">
+  <v-dialog-stub opendelay="0" closedelay="0" contentclass="" maxwidth="none" origin="center center" retainfocus="true" transition="dialog-transition" width="500">
+    <v-card-stub loaderheight="4" tag="div">
+      <v-card-title-stub class="headline grey lighten-2">Log In</v-card-title-stub>
+      <v-card-text-stub>
+        <v-form-stub class="mt-5 px-3">
+          <v-text-field-stub errorcount="1" errormessages="" messages="" rules="function (v) {
+        return v.length >= 3 || &quot;Minimum length is 3 characters&quot;;
+      }" successmessages="" value="" backgroundcolor="" label="Email" loaderheight="2" clearicon="$clear" type="text"></v-text-field-stub>
+          <v-text-field-stub errorcount="1" errormessages="" messages="" rules="function (v) {
+        return v.length >= 3 || &quot;Minimum length is 3 characters&quot;;
+      }" successmessages="" value="" backgroundcolor="" label="Password" loaderheight="2" clearicon="$clear" type="password"></v-text-field-stub>
+        </v-form-stub>
+      </v-card-text-stub>
+      <v-divider-stub></v-divider-stub>
+      <!---->
+      <v-card-actions-stub>
+        <v-spacer-stub></v-spacer-stub>
+        <v-btn-stub color="primary mx-0 mt-3" tag="button" activeclass="" text="true" type="button">Log In</v-btn-stub>
+      </v-card-actions-stub>
+    </v-card-stub>
+  </v-dialog-stub>
+</div>
+`;

@@ -11,9 +11,10 @@ Features:
 * Markdown support
 * Image uploads (using Firebase storage)
 * Realtime listener
+* Basic unit testing (Jest w/ `vue-test-utils`)
 
 Next Steps:
-* Implment testing (unit, end to end)
+* Implment more testing
 * Have a profile page where user can view their posts/comments
 
 ## Project setup
@@ -24,4 +25,9 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### To run unit tests for the project
+```
+npm run test:unit
 ```

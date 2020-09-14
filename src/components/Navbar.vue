@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// import AddBlogModal from "./AddBlogModal";
 import NewBlogPopup from "./NewBlogPopup";
 import LoginPopup from "./LoginPopup";
 import SignUpPopup from "./SignUpPopup";
